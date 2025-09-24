@@ -1,0 +1,46 @@
+# This is the root Cargo.toml for the workspace.
+# It defines the workspace members and shared dependencies.
+
+[workspace]
+# Use the new feature resolver.
+resolver = "2"
+
+# Define the crates that are part of this workspace.
+# The "flat" structure means that crates are located at the root of the repository.
+members = [
+    "app",
+    "lib",
+]
+
+# Shared dependencies for all crates in the workspace.
+# Crates can opt-in to using these dependencies by specifying `workspace = true` in their own Cargo.toml.
+[workspace.dependencies]
+# Error handling libraries.
+# `eyre` is used for application-level error reporting.
+# `thiserror` is used for library-level error types.
+eyre = "0.6"
+thiserror = "1.0"
+
+# Logging and tracing.
+# `tracing` is a framework for instrumenting Rust programs to collect structured, event-based diagnostic information.
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Data serialization and manipulation.
+# `serde` is a framework for serializing and deserializing Rust data structures efficiently and generically.
+uuid = { version = "1.8", features = ["v4", "serde"] }
+url = { version = "2.5", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+chrono = { version = "0.4", features = ["serde"] }
+
+# Utility libraries.
+# `camino` provides UTF-8 paths.
+# `ahash` is a fast hashing algorithm.
+camino = { version = "1.1", features = ["serde"] }
+ahash = "0.8"
+
+# Testing libraries.
+# `proptest` is a property-based testing framework.
+proptest = "1.4"
